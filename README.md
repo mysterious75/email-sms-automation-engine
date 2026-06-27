@@ -58,7 +58,7 @@ The system is fully functional and tested with live Twilio and SendGrid APIs.
 
 The frontend (`/public`) can be deployed as a static site. The application features a built-in **Static Mock Mode** that simulates the backend webhook responses, allowing recruiters and stakeholders to interact with the Dashboard Simulator entirely in the browser without spinning up the Node.js server.
 
-*Demo Link:* [Available on GitHub Pages]
+*Demo Link:* [https://mysterious75.github.io/email-sms-automation-engine/](https://mysterious75.github.io/email-sms-automation-engine/)
 
 ---
 *Built as a scalable architectural demonstration for B2C Growth Automation.*
