@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vora Protocol | Samsung-Inspired Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Samsung-style Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="brand">
+                <h1>VORA PROTOCOL</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-btn active" data-target="tab-dashboard">Dashboard</a>
+                <a href="#" class="nav-btn" data-target="tab-campaigns">Campaigns</a>
+                <a href="#" class="nav-btn" data-target="tab-audiences">Audiences</a>
+                <a href="#" class="nav-btn" data-target="tab-compliance">Compliance</a>
+            </div>
+            <div class="nav-actions">
+                <div class="status-pill">
+                    <span class="dot"></span> SANDBOX
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+
+        <!-- ==================== DASHBOARD TAB ==================== -->
+        <div id="tab-dashboard" class="tab-pane active">
+            <header class="hero">
+                <div class="hero-content">
+                    <h2>Growth Automation.</h2>
+                    <h2>Unleashed.</h2>
+                </div>
+            </header>
+
+            <section class="dashboard-top">
+                <div class="metrics-column">
+                    <div class="samsung-card">
+                        <h3>Emails Dispatched</h3>
+                        <div class="value" id="email-count">0</div>
+                        <div class="card-line"></div>
+                    </div>
+                    <div class="samsung-card">
+                        <h3>SMS Sent</h3>
+                        <div class="value" id="sms-count">0</div>
+                        <div class="card-line"></div>
+                    </div>
+                    <div class="samsung-card error-card">
+                        <h3 class="text-red">TCPA Opt-outs</h3>
+                        <div class="value text-red" id="optout-count">0</div>
+                        <div class="card-line bg-red"></div>
+                    </div>
+                </div>
+
+                <div class="samsung-card graph-card">
+                    <div class="card-header">
+                        <h3>Engagement Overview</h3>
+                        <select class="samsung-select"><option>Last 7 Days</option></select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="metricsChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-bottom">
+            <!-- Simulator -->
+            <div class="samsung-card">
+                <div class="card-header">
+                    <h3>Event Simulator</h3>
+                </div>
+                
+                <!-- Dynamic Test Inputs -->
+                <div style="margin-bottom: 1.5rem; padding: 1rem; background: #1a1a1a; border-radius: 8px; border: 1px solid #333;">
+                    <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 1rem;">Enter your verified Twilio phone and email for live testing.</p>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.75rem; color: #888; margin-bottom: 4px;">Test Email</label>
+                            <input type="email" id="test-email" class="samsung-input" placeholder="e.g. you@gmail.com">
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="display: block; font-size: 0.75rem; color: #888; margin-bottom: 4px;">Test Phone (Country Code)</label>
+                            <input type="text" id="test-phone" class="samsung-input" placeholder="e.g. +919876543210">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-grid">
+                        <button class="samsung-btn primary" onclick="triggerEvent('user.signup')">
+                            <span class="btn-title">Simulate Signup</span>
+                            <span class="btn-sub">E1 + SMS Verification</span>
+                        </button>
+                        <button class="samsung-btn" onclick="triggerEvent('mint_started_abandoned')">
+                            <span class="btn-title">Aha! Rescue</span>
+                            <span class="btn-sub">SMS Re-engagement</span>
+                        </button>
+                        <button class="samsung-btn" onclick="triggerEvent('proof_limit_80_percent')">
+                            <span class="btn-title">80% Limit Upsell</span>
+                            <span class="btn-sub">Frictionless Email</span>
+                        </button>
+                        <button class="samsung-btn" onclick="triggerEvent('sendgrid_bounce')">
+                            <span class="btn-title">Simulate Bounce</span>
+                            <span class="btn-sub">Invalid Email Webhook</span>
+                        </button>
+                        <button class="samsung-btn danger" onclick="triggerEvent('twilio_stop')">
+                            <span class="btn-title">Simulate "STOP"</span>
+                            <span class="btn-sub">TCPA Opt-Out Logic</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="samsung-card">
+                    <div class="card-header">
+                        <h3>Activity Log</h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>TIME</th>
+                                    <th>EVENT</th>
+                                    <th>CHANNEL</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS inserts rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== CAMPAIGNS TAB ==================== -->
+        <div id="tab-campaigns" class="tab-pane" style="display: none;">
+            <header class="tab-header">
+                <h2>Lifecycle Workflows</h2>
+                <p>Manage and optimize your automated SendGrid & Twilio sequences.</p>
+                <button class="samsung-btn primary" style="width: auto; padding: 0.8rem 1.5rem; margin-top: 1rem;">+ Create New Flow</button>
+            </header>
+
+            <div class="campaign-grid">
+                <!-- Campaign Card 1 -->
+                <div class="samsung-card campaign-card">
+                    <div class="camp-header">
+                        <div>
+                            <h3>Onboarding Welcome Series</h3>
+                            <span class="badge email">SendGrid (E1-E3)</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    </div>
+                    <p class="camp-desc">Triggers immediately after `user.signup`.</p>
+                    <div class="camp-stats">
+                        <div class="stat"><span>Open Rate</span><strong>68.4%</strong></div>
+                        <div class="stat"><span>CTR</span><strong>22.1%</strong></div>
+                    </div>
+                </div>
+                
+                <!-- Campaign Card 2 -->
+                <div class="samsung-card campaign-card">
+                    <div class="camp-header">
+                        <div>
+                            <h3>Aha! Moment Rescue</h3>
+                            <span class="badge sms">Twilio SMS</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    </div>
+                    <p class="camp-desc">Listens for `mint_started` and triggers after 15 mins if abandoned.</p>
+                    <div class="camp-stats">
+                        <div class="stat"><span>Delivered</span><strong>99.2%</strong></div>
+                        <div class="stat"><span>Rescued</span><strong>45.0%</strong></div>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 3 -->
+                <div class="samsung-card campaign-card">
+                    <div class="camp-header">
+                        <div>
+                            <h3>Frictionless Upsell (80%)</h3>
+                            <span class="badge email">SendGrid Email</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                    </div>
+                    <p class="camp-desc">Upsell prompt triggered exactly at 4/5 free limits used.</p>
+                    <div class="camp-stats">
+                        <div class="stat"><span>Sent</span><strong>1,204</strong></div>
+                        <div class="stat"><span>Conversion</span><strong>14.5%</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== AUDIENCES TAB ==================== -->
+        <div id="tab-audiences" class="tab-pane" style="display: none;">
+            <header class="tab-header">
+                <h2>Audience Segments</h2>
+                <p>View your dynamic database of creators and their engagement states.</p>
+            </header>
+            
+            <div class="samsung-card">
+                <div class="card-header">
+                    <h3>All Users</h3>
+                    <input type="text" class="samsung-input" placeholder="Search by email or phone...">
+                </div>
+                <div class="table-wrapper" style="height: 500px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>USER ID</th>
+                                <th>EMAIL</th>
+                                <th>PHONE</th>
+                                <th>SEGMENT</th>
+                                <th>LTV STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>USR-9921</td><td>creator_49@example.com</td><td>+1 555-0199</td><td><span class="badge">Power User</span></td><td class="text-green">PRO TIER</td></tr>
+                            <tr><td>USR-9920</td><td>john.doe@startup.io</td><td>+1 555-0144</td><td><span class="badge" style="border-color:#555;">Inactive</span></td><td style="color:#888;">CHURN RISK</td></tr>
+                            <tr><td>USR-9919</td><td>sarah.arts@gmail.com</td><td>+44 7700 900</td><td><span class="badge" style="border-color:#2189ff; color:#2189ff">Active</span></td><td>FREE TIER</td></tr>
+                            <tr><td>USR-9918</td><td>test_creator@example.com</td><td>+1 555-0102</td><td><span class="badge" style="border-color:#2189ff; color:#2189ff">Active</span></td><td>FREE TIER</td></tr>
+                            <tr><td>USR-9917</td><td>mike.builds@outlook.com</td><td>+1 555-0111</td><td><span class="badge">Power User</span></td><td class="text-green">PRO TIER</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== COMPLIANCE TAB ==================== -->
+        <div id="tab-compliance" class="tab-pane" style="display: none;">
+            <header class="tab-header">
+                <h2>TCPA & Legal Compliance</h2>
+                <p>Manage SMS opt-outs, timezone restrictions, and data privacy policies.</p>
+            </header>
+
+            <div class="dashboard-top">
+                <div class="samsung-card">
+                    <div class="card-header"><h3>Timezone Restrictions (Quiet Hours)</h3></div>
+                    <p style="color:#aaa; font-size: 0.9rem; margin-bottom: 1rem;">Automatically delay marketing SMS outside of legal operational hours.</p>
+                    <div class="time-settings">
+                        <div>
+                            <label>Marketing Start Time</label>
+                            <input type="time" class="samsung-input" value="08:00">
+                        </div>
+                        <div>
+                            <label>Marketing End Time</label>
+                            <input type="time" class="samsung-input" value="21:00">
+                        </div>
+                    </div>
+                    <button class="samsung-btn primary" style="width:100%; margin-top: 1rem;">Save Rules</button>
+                </div>
+
+                <div class="samsung-card error-card">
+                    <div class="card-header"><h3 class="text-red">Manual Opt-Out Blocklist</h3></div>
+                    <p style="color:#aaa; font-size: 0.9rem; margin-bottom: 1rem;">Manually add a phone number to the blocked registry.</p>
+                    <input type="text" class="samsung-input" placeholder="e.g. +1 555 123 4567" style="margin-bottom: 1rem; width: 100%;">
+                    <button class="samsung-btn danger" style="width:100%; text-align: center;">Block Number</button>
+                </div>
+            </div>
+            
+            <div class="samsung-card" style="margin-top: 1.5rem;">
+                <div class="card-header">
+                    <h3>Recent DND (Do Not Disturb) Violations Prevented</h3>
+                </div>
+                <div class="table-wrapper" style="height: 250px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TIME</th>
+                                <th>TARGET PHONE</th>
+                                <th>REASON</th>
+                                <th>ACTION TAKEN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Today, 10:41 PM</td><td>+1 555-0199</td><td>Quiet Hours (After 9 PM)</td><td class="text-green">Queued for 8 AM</td></tr>
+                            <tr><td>Today, 02:15 PM</td><td>+1 555-0199</td><td>User previously texted STOP</td><td class="text-red">Dropped Permanently</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
