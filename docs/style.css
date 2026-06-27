@@ -1,0 +1,151 @@
+:root {
+    --bg-black: #000000;
+    --bg-gray: #111111;
+    --border-dark: #333333;
+    --text-white: #ffffff;
+    --text-gray: #888888;
+    
+    /* Samsung Blue */
+    --samsung-blue: #2189ff;
+    --samsung-blue-hover: #1464c0;
+    --red: #ff3b30;
+    --green: #34c759;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Top Navigation */
+.top-nav {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-dark);
+    position: sticky;
+    top: 0; z-index: 100;
+}
+
+.nav-container {
+    max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+    height: 70px; display: flex; align-items: center; justify-content: space-between;
+}
+
+.brand h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { 
+    color: var(--text-gray); text-decoration: none; font-size: 0.9rem; font-weight: 600;
+    transition: 0.2s; padding: 25px 0; border-bottom: 2px solid transparent; cursor: pointer;
+}
+.nav-links a:hover { color: var(--text-white); }
+.nav-links a.active { color: var(--text-white); border-bottom-color: var(--samsung-blue); }
+
+.status-pill {
+    background: #1a1a1a; border: 1px solid var(--border-dark); padding: 6px 12px;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 8px;
+}
+.dot { width: 8px; height: 8px; background: #0f0; border-radius: 50%; box-shadow: 0 0 8px #0f0;}
+
+/* Main Layout */
+.main-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 4rem; }
+
+/* Tabs Logic */
+.tab-pane { display: none; animation: fadeIn 0.3s ease; }
+.tab-pane.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero Section */
+.hero { text-align: left; padding: 3rem 0; }
+.hero h2 { font-size: 3.5rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 0.5rem;}
+.tab-header { margin: 3rem 0 2rem; }
+.tab-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+.tab-header p { color: var(--text-gray); margin-top: 0.5rem; font-size: 1.1rem; }
+
+/* Samsung Style Cards */
+.samsung-card { background: var(--bg-gray); border-radius: 16px; padding: 2rem; border: 1px solid var(--border-dark); }
+.dashboard-top { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.metrics-column { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.metrics-column .samsung-card { position: relative; overflow: hidden; padding: 1.5rem; }
+.metrics-column h3 { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;}
+.metrics-column .value { font-size: 3rem; font-weight: 800; letter-spacing: -1px; }
+.card-line { position: absolute; bottom: 0; left: 0; height: 4px; width: 0%; background: var(--samsung-blue); transition: width 1s ease-out; }
+.samsung-card:hover .card-line { width: 100%; }
+
+.text-red { color: var(--red) !important; }
+.bg-red { background: var(--red) !important; }
+.text-green { color: var(--green) !important; }
+.error-card { border-color: rgba(255, 59, 48, 0.3); }
+
+/* Graph Section */
+.graph-card { display: flex; flex-direction: column; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.card-header h3 { font-size: 1.2rem; font-weight: 600; }
+.chart-container { flex-grow: 1; min-height: 300px; position: relative;}
+
+/* Dashboard Bottom */
+.dashboard-bottom { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+.btn-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+.samsung-btn {
+    background: #000; border: 1px solid var(--border-dark); color: #fff;
+    padding: 1.2rem; border-radius: 12px; text-align: left; cursor: pointer;
+    display: flex; flex-direction: column; gap: 4px; transition: 0.2s;
+}
+.samsung-btn:hover { background: #1a1a1a; border-color: #555; }
+.samsung-btn.primary { background: var(--samsung-blue); border-color: var(--samsung-blue); }
+.samsung-btn.primary:hover { background: var(--samsung-blue-hover); }
+.samsung-btn.danger { border-color: rgba(255,59,48,0.5); }
+.samsung-btn.danger:hover { background: rgba(255,59,48,0.1); }
+
+.btn-title { font-size: 1.05rem; font-weight: 600; font-family: 'Inter'; }
+.btn-sub { font-size: 0.8rem; color: #aaa; }
+.samsung-btn.primary .btn-sub { color: #e0e0e0; }
+
+/* Forms & Inputs */
+.samsung-select, .samsung-input { 
+    background: #000; color: #fff; border: 1px solid var(--border-dark); 
+    padding: 10px 16px; border-radius: 8px; font-family: 'Inter'; outline: none; width: 100%;
+}
+.samsung-input:focus { border-color: var(--samsung-blue); }
+.time-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.time-settings label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 0.5rem;}
+
+/* Table */
+.table-wrapper { height: 400px; overflow-y: auto; padding-right: 10px;}
+.table-wrapper::-webkit-scrollbar { width: 4px; }
+.table-wrapper::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+th { color: var(--text-gray); font-weight: 600; padding-bottom: 1rem; border-bottom: 1px solid var(--border-dark); position: sticky; top: 0; background: var(--bg-gray); }
+td { padding: 1.2rem 0; border-bottom: 1px solid #222; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Badges */
+.badge { padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; border: 1px solid #333; }
+.badge.email { color: var(--samsung-blue); border-color: var(--samsung-blue); background: rgba(33, 137, 255, 0.1);}
+.badge.sms { color: #a78bfa; border-color: #a78bfa; background: rgba(167, 139, 250, 0.1);}
+
+/* Campaigns Grid */
+.campaign-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.campaign-card { display: flex; flex-direction: column; justify-content: space-between;}
+.camp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;}
+.camp-header h3 { font-size: 1.1rem; margin-bottom: 0.5rem;}
+.camp-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.4;}
+.camp-stats { display: flex; gap: 2rem; border-top: 1px solid var(--border-dark); padding-top: 1rem;}
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat span { font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase;}
+.stat strong { font-size: 1.2rem; }
+
+/* Toggle Switch */
+.switch { position: relative; display: inline-block; width: 40px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 24px; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--samsung-blue); }
+input:checked + .slider:before { transform: translateX(16px); }
