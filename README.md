@@ -4,6 +4,22 @@
 
 A decoupled, event-driven microservice built to orchestrate and automate B2C subscriber growth workflows. This engine acts as the telemetry and communications layer, integrating seamlessly with existing platforms (e.g., Vora Protocol) to drive constituent engagement, manage lifecycle marketing, and enforce strict legal compliance (TCPA).
 
+## 📸 Live Proof of Concept
+
+The system is fully functional and tested with live Twilio and SendGrid APIs.
+
+### 1. Real-Time Telemetry & Tracking
+![Dashboard Graph](assets/dashboard-graph.png)
+*Live Chart.js dashboard visualizing engagement metrics across channels.*
+
+### 2. Event Simulation & Webhooks
+![Simulator Payload](assets/dashboard-simulator.png)
+*Event payload injection demonstrating automated trigger routing (e.g., test@test.com).*
+
+### 3. Verified Inbox Delivery
+![Mobile Delivery Proof](assets/mobile-proof.jpeg)
+*Actual production delivery verifying successful SendGrid integration arriving cleanly in the Gmail inbox.*
+
 ## 🚀 Key Features
 
 * **Event-Driven Architecture:** Listens for platform webhooks (e.g., `user.signup`, `proof_limit_80_percent`, `mint_started_abandoned`) and triggers precise automated flows.
