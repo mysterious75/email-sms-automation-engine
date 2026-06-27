@@ -1,4 +1,4 @@
-# Omnichannel Lifecycle Growth Engine
+# Email & SMS Automation Engine
 
 ![Vora Protocol Engine](https://img.shields.io/badge/Status-Production_Ready-success) ![Node.js](https://img.shields.io/badge/Node.js-18.x-green) ![SendGrid](https://img.shields.io/badge/SendGrid-Email_API-blue) ![Twilio](https://img.shields.io/badge/Twilio-SMS_API-red)
 
